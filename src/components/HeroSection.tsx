@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardTitle,
 } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import logoUrl from "@/assets/logo.png";
 
 interface HeroSectionProps {
@@ -39,9 +40,9 @@ export function HeroSection({ onGetStarted }: HeroSectionProps) {
             <Button variant="default" size="lg" onClick={onGetStarted}>
               Comenzar
             </Button>
-            <Button variant="outline" size="lg" asChild>
-              <a href="#docs">Ver documentación</a>
-            </Button>
+            <a href="#docs" className={cn(buttonVariants({ variant: "outline", size: "lg" }))}>
+              Ver documentación
+            </a>
           </div>
 
           <div className="relative h-48 w-full max-w-md">

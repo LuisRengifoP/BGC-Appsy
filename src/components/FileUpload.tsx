@@ -121,35 +121,39 @@ function UploadZone({
           </div>
         ) : (
           <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className={cn(
-              "border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors",
-              isDragActive
-                ? "border-primary bg-primary/5"
-                : "border-muted-foreground/25 hover:border-primary/50"
-            )}
-            {...getRootProps()}
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
           >
-            <input {...getInputProps()} />
-            <MapPin className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
-            {isDragActive ? (
-              <p className="text-primary font-medium">
-                Suelta el archivo aquí...
-              </p>
-            ) : (
-              <>
-                <p className="font-medium mb-1">
-                  Arrastra y suelta un archivo aquí
+            <div
+              className={cn(
+                "border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors",
+                isDragActive
+                  ? "border-primary bg-primary/5"
+                  : "border-muted-foreground/25 hover:border-primary/50"
+              )}
+              {...getRootProps()}
+            >
+              <input {...getInputProps()} />
+              <MapPin className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
+              {isDragActive ? (
+                <p className="text-primary font-medium">
+                  Suelta el archivo aquí...
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  o haz clic para seleccionar
-                </p>
-                <p className="text-xs text-muted-foreground mt-2">
-                  Archivos aceptados: .xlsx, .xls, .csv
-                </p>
-              </>
-            )}
+              ) : (
+                <>
+                  <p className="font-medium mb-1">
+                    Arrastra y suelta un archivo aquí
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    o haz clic para seleccionar
+                  </p>
+                  <p className="text-xs text-muted-foreground mt-2">
+                    Archivos aceptados: .xlsx, .xls, .csv
+                  </p>
+                </>
+              )}
+            </div>
           </motion.div>
         )}
       </CardContent>

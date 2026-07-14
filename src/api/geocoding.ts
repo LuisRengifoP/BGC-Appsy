@@ -29,7 +29,7 @@ function mapResultToRecords(
   rows: Row[],
   latField: string,
   lonField: string,
-  stats: { fromMaster: number; geocoded: number; notFound: number },
+  _stats: { fromMaster: number; geocoded: number; notFound: number },
   mostrarSinEncontrar: boolean
 ): GeocodingRecord[] {
   const find = (row: Row, candidates: string[]): string | null => {
@@ -84,8 +84,6 @@ export async function processFilesClientSide(
   let masterIndex: MasterIndexResult;
   let masterRows: Row[];
   let inputRows: Row[];
-  let inputLatField: string;
-  let inputLonField: string;
 
   addLog(setActivityLog, "info", "Leyendo base maestra...");
   onProgress({
