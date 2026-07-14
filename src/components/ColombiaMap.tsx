@@ -170,7 +170,7 @@ export function ColombiaMap({ records = [] }: ColombiaMapProps) {
   }, [records]);
 
   return (
-    <div className="rounded-xl border border-border bg-card overflow-hidden shadow-sm">
+    <div className="rounded-xl border border-border bg-card overflow-hidden shadow-sm" style={{ isolation: "isolate" }}>
       <div className="px-4 py-3 border-b border-border flex items-center justify-between">
         <h3 className="text-sm font-semibold text-foreground">
           {records.length > 0 ? "Resultados Geogr\u00e1ficos" : "Ciudades Principales"}

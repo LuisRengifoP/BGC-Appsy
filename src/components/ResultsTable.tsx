@@ -198,6 +198,7 @@ export function ResultsTable({
       }),
       columnHelper.accessor("barrio", {
         header: "Barrio",
+        meta: { hideOnMobile: true },
         cell: (info) => info.getValue(),
       }),
       columnHelper.accessor("direccion", {
@@ -245,6 +246,7 @@ export function ResultsTable({
       columnHelper.accessor("estado", {
         id: "fuente",
         header: "Fuente",
+        meta: { hideOnMobile: true },
         cell: (info) => {
           const estado = info.getValue();
           const fuente = fuenteInfo[estado];
@@ -316,7 +318,13 @@ export function ResultsTable({
                 {table.getHeaderGroups().map((headerGroup) => (
                   <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => (
-                      <TableHead key={header.id} className="whitespace-nowrap">
+                      <TableHead
+                        key={header.id}
+                        className={cn(
+                          "whitespace-nowrap",
+                          (header.column.columnDef as { meta?: { hideOnMobile?: boolean } }).meta?.hideOnMobile && "hidden md:table-cell"
+                        )}
+                      >
                         {header.isPlaceholder
                           ? null
                           : flexRender(
@@ -339,7 +347,13 @@ export function ResultsTable({
                       )}
                     >
                       {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id} className="whitespace-nowrap">
+                        <TableCell
+                          key={cell.id}
+                          className={cn(
+                            "whitespace-nowrap",
+                            (cell.column.columnDef as { meta?: { hideOnMobile?: boolean } }).meta?.hideOnMobile && "hidden md:table-cell"
+                          )}
+                        >
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()

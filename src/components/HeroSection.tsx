@@ -36,7 +36,7 @@ export function HeroSection({ onGetStarted }: HeroSectionProps) {
             </CardDescription>
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex flex-wrap justify-center gap-3">
             <Button variant="default" size="lg" onClick={onGetStarted}>
               Comenzar
             </Button>
