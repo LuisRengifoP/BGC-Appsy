@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   useReactTable,
@@ -90,10 +90,18 @@ function EditableCoordCell({
 }) {
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(value != null ? String(value) : "");
+  const didEditRef = useRef(false);
+
+  useEffect(() => {
+    setDraft(value != null ? String(value) : "");
+  }, [value]);
 
   const commit = () => {
     setEditing(false);
-    onEdit(rowIdx, field, draft);
+    if (didEditRef.current) {
+      didEditRef.current = false;
+      onEdit(rowIdx, field, draft);
+    }
   };
 
   if (editing) {
@@ -101,12 +109,15 @@ function EditableCoordCell({
       <Input
         type="text"
         value={draft}
-        onChange={(e) => setDraft(e.target.value)}
+        onChange={(e) => {
+          didEditRef.current = true;
+          setDraft(e.target.value);
+        }}
         onBlur={commit}
         onKeyDown={(e) => {
           if (e.key === "Enter") commit();
           if (e.key === "Escape") {
-            setDraft(value != null ? String(value) : "");
+            didEditRef.current = false;
             setEditing(false);
           }
         }}
@@ -123,7 +134,7 @@ function EditableCoordCell({
         value == null && "text-muted-foreground italic"
       )}
       onClick={() => {
-        setDraft(value != null ? String(value) : "");
+        didEditRef.current = false;
         setEditing(true);
       }}
     >
